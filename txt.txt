@@ -1,0 +1,39 @@
+Để xây dựng mô hình nhận diện hành động bạo lực và không bạo lực 
+qua từng frame video bằng LSTM và CNN và sử dụng với webcam hoặc thêm video, 
+bạn có thể sử dụng các bước sau đây để xây dựng một chương trình hoàn chỉnh:
+
+import cv2
+import tensorflow as tf
+import numpy as np
+
+# Cài đặt mô hình LSTM và CNN
+model = tf.keras.models.Sequential([
+    # Các lớp LSTM và CNN của bạn
+])
+
+# Compile mô hình với optimizer và loss function
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+
+# Đọc video từ webcam hoặc từ file
+video_capture = cv2.VideoCapture(0)  # Đọc từ webcam
+# video_capture = cv2.VideoCapture('tên_file.định_dạng')  # Đọc từ file
+
+while True:
+    # Đọc frame video
+    ret, frame = video_capture.read()
+
+    # Xử lý frame video theo yêu cầu của mô hình
+    processed_frame = preprocess_frame(frame)
+
+    # Dự đoán hành động bạo lực hay không bạo lực
+    prediction = model.predict(processed_frame)
+
+    # Hiển thị kết quả dự đoán trên màn hình
+    cv2.imshow('Video', frame)
+
+    # Nếu nhấn phím q, dừng chương trình
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+# Đóng video capture và hủy các cửa sổ hiển thị
+video_capture.release()
